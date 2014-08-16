@@ -10,7 +10,10 @@
 
 @interface TableViewController () {
     NSMutableArray *_todoList;
+    UIView *_customSelectedTableCellView;
 }
+
+- (void)getTodos;
 
 @end
 
@@ -35,16 +38,23 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     self.navigationItem.leftBarButtonItem = self.editButtonItem;
     
+    if (!_customSelectedTableCellView) {
+        _customSelectedTableCellView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 640, 88)];
+        [_customSelectedTableCellView setBackgroundColor:[UIColor colorWithRed:0.111 green:0.77 blue:0.132 alpha:0.1]];
+    }
+    
     if (!_todoList) {
         _todoList = [[NSMutableArray alloc] init];
     }
-    
-    NSArray *todos = [TodoDb database].todoDbInfos;
-    for (Todo *todo in todos) {
-        [_todoList insertObject:todo atIndex:0];
-    }
-    [self.tableView reloadData];
+    // fetch all todos from sqlite db
+    [self getTodos];
+}
 
+- (void)getTodos
+{
+    NSArray *todos = [[TodoDb database] all];
+    [_todoList setArray:todos];
+    [self.tableView reloadData];
 }
 
 - (void)didReceiveMemoryWarning
@@ -79,15 +89,11 @@
     [formatter setDateFormat:@"MMMM d, YYYY"];
     cell.detailTextLabel.text = [formatter stringFromDate:[todo dateCreated]];
     
-    // set custom bgColor for offset rows
-    if ([indexPath row]%2 == 0) {
-        [cell.contentView setBackgroundColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:0.05]];
-    }
     // pimp cell
     [cell.detailTextLabel setBackgroundColor:[UIColor colorWithWhite:1 alpha:0]];
     [cell.textLabel setBackgroundColor:[UIColor colorWithWhite:1 alpha:0]];
-    [cell setSelectedBackgroundView:[[UIView alloc] initWithFrame:CGRectMake(0, 0, cell.frame.size.width, cell.frame.size.height)]];
-    [cell.selectedBackgroundView setBackgroundColor:[UIColor colorWithRed:0.122 green:.120 blue:1 alpha:0.1]];
+    [cell setSelectedBackgroundView:_customSelectedTableCellView];
+
     return cell;
 }
 
@@ -136,20 +142,15 @@
 
 - (void)todoFormDidSubmitWithData:(NSString *)title fromController:(id)controller
 {
+    if ([[TodoDb database] insertNewTodoWithTitle:title]) {
+        NSLog(@"YES!");
+        [self getTodos];
+    } else {
+        NSLog(@"NO!");
+    }
+    
     TodoFormViewController *todoFVM = (TodoFormViewController *)controller;
     [todoFVM dismissViewControllerAnimated:YES completion:nil];
-    
-    if (!_todoList) {
-        _todoList = [[NSMutableArray alloc] init];
-    }
-    Todo *todo = [[Todo alloc] init];
-    todo.title = title;
-    todo.done = NO;
-    todo.dateCreated = [NSDate date];
-    
-    [_todoList insertObject:todo atIndex:0];
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
-    [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
 }
 
 #pragma mark - Navigation
