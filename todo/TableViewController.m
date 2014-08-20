@@ -10,7 +10,6 @@
 
 @interface TableViewController () {
     NSMutableArray *_todoList;
-    UIView *_customSelectedTableCellView;
 }
 
 - (void)getTodos;
@@ -36,12 +35,7 @@
     // self.clearsSelectionOnViewWillAppear = NO;
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    self.navigationItem.leftBarButtonItem = self.editButtonItem;
-    
-    if (!_customSelectedTableCellView) {
-        _customSelectedTableCellView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 640, 88)];
-        [_customSelectedTableCellView setBackgroundColor:[UIColor colorWithRed:0.111 green:0.77 blue:0.132 alpha:0.1]];
-    }
+    // self.navigationItem.leftBarButtonItem = self.editButtonItem;
     
     if (!_todoList) {
         _todoList = [[NSMutableArray alloc] init];
@@ -65,13 +59,13 @@
 
 #pragma mark - Table view data source
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+- (int)numberOfSectionsInTableView:(UITableView *)tableView
 {
     // Return the number of sections.
     return 1;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+- (int)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
     return _todoList.count;
@@ -79,38 +73,35 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"todocell" forIndexPath:indexPath];
+    TodoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TodoCell" forIndexPath:indexPath];
     
     // Configure the cell...
     Todo *todo = [_todoList objectAtIndex:[indexPath row]];
-    cell.textLabel.text = todo.title;
+    cell.titleField.text = todo.title;
     // format date
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateFormat:@"MMMM d, YYYY"];
-    cell.detailTextLabel.text = [formatter stringFromDate:[todo dateCreated]];
-    
-    // pimp cell
-    [cell.detailTextLabel setBackgroundColor:[UIColor colorWithWhite:1 alpha:0]];
-    [cell.textLabel setBackgroundColor:[UIColor colorWithWhite:1 alpha:0]];
-    [cell setSelectedBackgroundView:_customSelectedTableCellView];
-
+    [formatter setDateFormat:@"MMMM dd, YYYY"];
+    cell.dateField.text = [formatter stringFromDate:[todo dateCreated]];
     return cell;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+
+- (float)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 88.0f;
+    return 88;
 }
 
 
+/*
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
     // Return NO if you do not want the specified item to be editable.
     return YES;
 }
+*/
 
-
+/*
 // Override to support editing the table view.
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -123,6 +114,7 @@
         // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
     }   
 }
+*/
 
 /*
 // Override to support rearranging the table view.
@@ -164,5 +156,9 @@
     [todoFVC setDelegate:self];
 }
 
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
+{
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"cellWillEnterEditMode" object:nil];
+}
 
 @end

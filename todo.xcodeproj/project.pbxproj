@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		352D5E4D19A35C50005E2806 /* TodoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 352D5E4B19A35C50005E2806 /* TodoTableViewCell.m */; };
 		3551BBBB199CC8D6005958B4 /* Todo.m in Sources */ = {isa = PBXBuildFile; fileRef = 3551BBBA199CC8D6005958B4 /* Todo.m */; };
 		3551BBBE199CD4B1005958B4 /* TodoFormViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3551BBBD199CD4B1005958B4 /* TodoFormViewController.m */; };
 		35FE3B51199CC45800C78304 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35FE3B50199CC45800C78304 /* Foundation.framework */; };
@@ -25,7 +26,6 @@
 		35FE3B87199CC5C200C78304 /* TableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 35FE3B86199CC5C200C78304 /* TableViewController.m */; };
 		35FEEA5B199E111E00EEF627 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 35FEEA5A199E111E00EEF627 /* libsqlite3.dylib */; };
 		35FEEA5E199E122E00EEF627 /* TodoDb.m in Sources */ = {isa = PBXBuildFile; fileRef = 35FEEA5D199E122E00EEF627 /* TodoDb.m */; };
-		35FEEA60199E1E0B00EEF627 /* todoledo.sqlite3 in Resources */ = {isa = PBXBuildFile; fileRef = 35FEEA5F199E1E0B00EEF627 /* todoledo.sqlite3 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -39,6 +39,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		352D5E4A19A35C50005E2806 /* TodoTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TodoTableViewCell.h; sourceTree = "<group>"; };
+		352D5E4B19A35C50005E2806 /* TodoTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TodoTableViewCell.m; sourceTree = "<group>"; };
 		3551BBB9199CC8D6005958B4 /* Todo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Todo.h; sourceTree = "<group>"; };
 		3551BBBA199CC8D6005958B4 /* Todo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Todo.m; sourceTree = "<group>"; };
 		3551BBBC199CD4B1005958B4 /* TodoFormViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TodoFormViewController.h; sourceTree = "<group>"; };
@@ -65,7 +67,6 @@
 		35FEEA5A199E111E00EEF627 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		35FEEA5C199E122E00EEF627 /* TodoDb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TodoDb.h; sourceTree = "<group>"; };
 		35FEEA5D199E122E00EEF627 /* TodoDb.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TodoDb.m; sourceTree = "<group>"; };
-		35FEEA5F199E1E0B00EEF627 /* todoledo.sqlite3 */ = {isa = PBXFileReference; lastKnownFileType = file; path = todoledo.sqlite3; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -127,7 +128,6 @@
 		35FE3B56199CC45800C78304 /* todo */ = {
 			isa = PBXGroup;
 			children = (
-				35FEEA5F199E1E0B00EEF627 /* todoledo.sqlite3 */,
 				35FE3B5F199CC45800C78304 /* AppDelegate.h */,
 				35FE3B60199CC45800C78304 /* AppDelegate.m */,
 				35FE3B62199CC45800C78304 /* Main.storyboard */,
@@ -141,6 +141,8 @@
 				3551BBBD199CD4B1005958B4 /* TodoFormViewController.m */,
 				35FEEA5C199E122E00EEF627 /* TodoDb.h */,
 				35FEEA5D199E122E00EEF627 /* TodoDb.m */,
+				352D5E4A19A35C50005E2806 /* TodoTableViewCell.h */,
+				352D5E4B19A35C50005E2806 /* TodoTableViewCell.m */,
 			);
 			path = todo;
 			sourceTree = "<group>";
@@ -251,7 +253,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				35FE3B69199CC45800C78304 /* Images.xcassets in Resources */,
-				35FEEA60199E1E0B00EEF627 /* todoledo.sqlite3 in Resources */,
 				35FE3B5B199CC45800C78304 /* InfoPlist.strings in Resources */,
 				35FE3B64199CC45800C78304 /* Main.storyboard in Resources */,
 			);
@@ -272,6 +273,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				352D5E4D19A35C50005E2806 /* TodoTableViewCell.m in Sources */,
 				35FE3B61199CC45800C78304 /* AppDelegate.m in Sources */,
 				35FE3B87199CC5C200C78304 /* TableViewController.m in Sources */,
 				35FE3B5D199CC45800C78304 /* main.m in Sources */,

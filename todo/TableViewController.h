@@ -10,7 +10,8 @@
 #import "Todo.h"
 #import "TodoFormViewController.h"
 #import "TodoDb.h"
+#import "TodoTableViewCell.h"
 
-@interface TableViewController : UITableViewController <TodoFormDelegate>
+@interface TableViewController : UITableViewController <TodoFormDelegate, UIScrollViewDelegate>
 
 @end
